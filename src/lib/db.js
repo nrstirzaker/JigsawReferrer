@@ -1,4 +1,5 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
+import '@dotenv/dotenv/config';
 // You can specify any property from the postgres-js connection options
 const db = drizzle({
     connection: {
