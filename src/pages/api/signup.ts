@@ -1,19 +1,32 @@
-export const prerender = false; // Not needed in 'server' mode
-import type { APIRoute } from "astro";
+export const prerender = false // Not needed in 'server' mode
+import type { APIRoute } from 'astro'
+import { authClient } from '../../lib/auth-client' //import the auth client
+import { auth } from '@/lib/auth.ts'
 
 export const POST: APIRoute = async ({ request }) => {
-    const data = await request.formData();
-    const fullName = data.get("fullName");
-    const email = data.get("email");
-    const password = data.get("password");
-    const confirmPassword = data.get("confirmPassword");
+    const formData = await request.formData()
+    const nameValue = formData.get('firstName') + ' ' + formData.get('surname')
+    const emailValue: string = formData.get('email') as string
+    const passwordValue = formData.get('password') as string
+    const confirmPassword = formData.get('confirmPassword')
 
-    console.log("fullName", fullName);
+    console.log('full name', nameValue)
+
+    const response = await auth.api.signUpEmail({
+        returnHeaders: true,
+        body: {
+            email: emailValue,
+            password: passwordValue,
+            name: nameValue,
+        },
+
+        asResponse: true,
+    })
+
     return new Response(
         JSON.stringify({
-            message: "Success!"
+            message: 'Success!',
         }),
         { status: 200 }
-    );
-
+    )
 }

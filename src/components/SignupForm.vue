@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import {
     Card,
@@ -14,6 +16,23 @@ import {
     FieldLabel,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+
+const responseMessage = ref<string>()
+//const router = useRouter()
+async function submit(e: Event) {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement)
+    const response = await fetch('/api/signup', {
+        method: 'POST',
+        body: formData,
+    })
+    const data = await response.json()
+    responseMessage.value = data.message
+    //router.push({
+    //    path: 'privacypolicy/${emailaddress}',
+    //})
+}
 </script>
 
 <template>
@@ -25,7 +44,7 @@ import { Input } from '@/components/ui/input'
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <form action="/api/signinup" method="POST">
+            <form @submit="submit">
                 <FieldGroup>
                     <Field>
                         <FieldLabel for="firstName">
@@ -65,22 +84,6 @@ import { Input } from '@/components/ui/input'
                             required
                         />
                     </Field>
-                    <Field>
-                        <FieldLabel for="contactPhone">
-                            Contact Phone Number
-                            <span class="text-red-600">*</span>
-                        </FieldLabel>
-                        <Input
-                            id="contactPhoneNumber"
-                            type="text"
-                            name="contactPhoneNumber"
-                            required
-                        />
-                    </Field>
-                    <FieldDescription>
-                        We'll only use your email address and phone number to
-                        contact you, we will not share these with anyone else.
-                    </FieldDescription>
                     <Field>
                         <FieldLabel for="password">
                             Password
