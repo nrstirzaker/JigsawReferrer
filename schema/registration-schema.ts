@@ -3,20 +3,29 @@ import { sql } from 'drizzle-orm'
 
 // Referrers Table
 
-export const referrers = pgTable('referrers', {
-    referrerId: integer('referrer_id').primaryKey().generatedAlwaysAsIdentity(),
-    organisationId: integer('organisation_id').references(
-        () => organisations.organisationId,
-        {
-            onDelete: 'cascade',
-            onUpdate: 'cascade',
-        }
-    ),
-    firstName: varchar('first_name', { length: 255 }).notNull(),
-    lastName: varchar('last_name', { length: 255 }).notNull(),
-    email: varchar('email', { length: 255 }).unique(),
-    phoneNumber: varchar('phone_number', { length: 20 }),
-})
+export const referrers = pgTable(
+    'referrers',
+    {
+        referrerId: integer('referrer_id')
+            .primaryKey()
+            .generatedAlwaysAsIdentity(),
+        organisationId: integer('organisation_id').references(
+            () => organisations.organisationId,
+            {
+                onDelete: 'cascade',
+                onUpdate: 'cascade',
+            }
+        ),
+        title: varchar('title', { length: 6 }),
+        firstName: varchar('first_name', { length: 255 }).notNull(),
+        lastName: varchar('last_name', { length: 255 }).notNull(),
+        email: varchar('email', { length: 255 }).unique(),
+        phoneNumber: varchar('phone_number', { length: 20 }),
+    },
+    table => [
+        sql`CONSTRAINT title_valid CHECK (${table.title} IN ('mr', 'mrs', 'miss', 'ms'))`,
+    ]
+)
 
 // Organisations Table
 
