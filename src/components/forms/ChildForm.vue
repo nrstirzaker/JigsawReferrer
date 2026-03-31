@@ -20,7 +20,7 @@ const options = ['Male', 'Female', 'Prefer not to say']
             <CardDescription> Enter child details below </CardDescription>
         </CardHeader>
         <CardContent>
-            <form action="/api/children" method="POST">
+            <form action="/api/registration/child" method="POST">
                 <FieldGroup>
                     <Field>
                         <FieldLabel for="firstname"> Firstname </FieldLabel>
@@ -46,8 +46,8 @@ const options = ['Male', 'Female', 'Prefer not to say']
                             id="age"
                             type="number"
                             min="0"
-                            max="50"
-                            placeholder="10"
+                            max="20"
+                            placeholder="Enter age"
                             name="age"
                         />
                     </Field>
@@ -61,10 +61,10 @@ const options = ['Male', 'Female', 'Prefer not to say']
                             :options="options"
                         />
                     </Field>
-                    <Field>
+                    <div class="flex justify-center gap-5">
                         <Button type="submit"> Save </Button>
                         <Button type="button"> Cancel </Button>
-                    </Field>
+                    </div>
                 </FieldGroup>
             </form>
         </CardContent>

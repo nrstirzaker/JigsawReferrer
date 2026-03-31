@@ -28,7 +28,7 @@ const organisationOptions = ['Organisation One', 'Organisation Two']
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <form action="/api/referrer-registration" method="POST">
+            <form action="/api/registration/referrer" method="POST">
                 <FieldGroup>
                     <Field>
                         <FieldLabel for="title"> Title </FieldLabel>
@@ -103,10 +103,10 @@ const organisationOptions = ['Organisation One', 'Organisation Two']
                         />
                     </Field>
 
-                    <Field>
+                    <div class="flex justify-center gap-5">
                         <Button type="submit"> Save </Button>
                         <Button type="button"> Cancel </Button>
-                    </Field>
+                    </div>
                 </FieldGroup>
             </form>
         </CardContent>

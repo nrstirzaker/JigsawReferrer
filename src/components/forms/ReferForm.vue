@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input'
             <CardDescription> Enter your information below </CardDescription>
         </CardHeader>
         <CardContent>
-            <form action="/api/referral" method="POST">
+            <form action="/api/refer" method="POST">
                 <FieldGroup>
                     <Field>
                         <FieldLabel for="name"> Full Name </FieldLabel>
@@ -61,10 +61,10 @@ import { Input } from '@/components/ui/input'
                             required
                         />
                     </Field>
-                    <Field>
+                    <div class="flex justify-center gap-5">
                         <Button type="submit"> Save </Button>
                         <Button type="button"> Cancel </Button>
-                    </Field>
+                    </div>
                 </FieldGroup>
             </form>
         </CardContent>

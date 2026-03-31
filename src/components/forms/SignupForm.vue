@@ -25,7 +25,7 @@ import { Input } from '@/components/ui/input'
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <form action="/api/signup" method="POST">
+            <form action="/api/user/signup" method="POST">
                 <FieldGroup>
                     <Field>
                         <FieldLabel for="fullName"> Full Name </FieldLabel>

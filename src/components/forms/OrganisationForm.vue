@@ -23,7 +23,7 @@ const options = ['Type One', 'Type Two']
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <form action="/api/organisation" method="POST">
+            <form action="/api/registration/organisation" method="POST">
                 <FieldGroup>
                     <Field>
                         <FieldLabel for="nameOfOrganisation">
@@ -57,10 +57,10 @@ const options = ['Type One', 'Type Two']
                             name="address"
                         />
                     </Field>
-                    <Field>
+                    <div class="flex justify-center gap-5">
                         <Button type="submit"> Save </Button>
                         <Button type="button"> Cancel </Button>
-                    </Field>
+                    </div>
                 </FieldGroup>
             </form>
         </CardContent>
