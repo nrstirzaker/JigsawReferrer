@@ -23,7 +23,7 @@ const options = ['Type One', 'Type Two']
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <form action="/api/registration/organisation" method="POST">
+            <form action="/api/organisation" method="POST">
                 <FieldGroup>
                     <Field>
                         <FieldLabel for="nameOfOrganisation">
