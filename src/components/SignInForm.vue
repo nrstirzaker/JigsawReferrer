@@ -20,6 +20,27 @@ import { Input } from '@/components/ui/input'
 const props = defineProps<{
     class?: HTMLAttributes['class']
 }>()
+
+async function submit(e: Event) {
+    e.preventDefault()
+
+    const email = (e.currentTarget as HTMLFormElement).email.value
+    const password = (e.currentTarget as HTMLFormElement).password.value
+    const response = await fetch('/api/auth/sign-in/email', {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        credentials: 'include',
+    })
+
+    if (response.ok) {
+        window.location.href = '/'
+    } else {
+        console.error('login fail')
+    }
+}
 </script>
 
 <template>
@@ -33,7 +54,7 @@ const props = defineProps<{
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <form>
+                <form @submit="submit">
                     <FieldGroup>
                         <Field>
                             <FieldLabel for="email"> Email </FieldLabel>
@@ -41,6 +62,7 @@ const props = defineProps<{
                                 id="email"
                                 type="email"
                                 placeholder="m@example.com"
+                                name="email"
                                 required
                             />
                         </Field>
@@ -56,7 +78,14 @@ const props = defineProps<{
                                     Forgot your password?
                                 </a>
                             </div>
-                            <Input id="password" type="password" required />
+                        </Field>
+                        <Field>
+                            <Input
+                                id="password"
+                                type="password"
+                                name="password"
+                                required
+                            />
                         </Field>
                         <Field>
                             <Button type="submit"> Sign In </Button>

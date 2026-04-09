@@ -12,33 +12,27 @@ import {
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 
-const tokenValue = ref('')
-
-const props = defineProps<{
-    token: string
-}>()
-
-watch(
-    () => props.token,
-    (val: string) => {
-        tokenValue.value = val ?? ''
-    },
-    { immediate: true }
-)
-
 async function submit(e: Event) {
     e.preventDefault()
 
-    const password = (e.currentTarget as HTMLFormElement).password.value
-    const token = (e.currentTarget as HTMLFormElement).token.value
+    const newPassword = (e.currentTarget as HTMLFormElement).newPassword.value
+    const currentPassword = (e.currentTarget as HTMLFormElement).currentPassword
+        .value
 
-    const response = await fetch('/api/auth/reset-password', {
+    const response = await fetch('/api/auth/change-password', {
         method: 'POST',
-        body: JSON.stringify({ newPassword: password, token: token }),
+        body: JSON.stringify({
+            newPassword: newPassword,
+            currentPassword: currentPassword,
+            revokeOtherSessions: true,
+        }),
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials: 'include',
     })
+
+    console.log('response: ' + response is 400 if current password is not correct
 
     window.location.href = 'http://localhost:4321/signin'
 }
@@ -48,9 +42,9 @@ async function submit(e: Event) {
     <div :class="cn('flex flex-col gap-6')">
         <Card>
             <CardHeader>
-                <CardTitle>Reset Password</CardTitle>
+                <CardTitle>Change Password</CardTitle>
                 <CardDescription>
-                    Please enter your new password below
+                    Please enter your current and new password below
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -58,38 +52,40 @@ async function submit(e: Event) {
                     <FieldGroup>
                         <Field>
                             <div class="flex items-center">
-                                <FieldLabel for="password">
-                                    Password <span class="text-red-600">*</span>
+                                <FieldLabel for="currentPassword">
+                                    Current Password
+                                    <span class="text-red-600">*</span>
                                 </FieldLabel>
                             </div>
                             <Input
-                                id="password"
+                                id="currentPassword"
                                 type="password"
-                                name="password"
+                                name="currentPassword"
                                 required
                             />
                         </Field>
                         <Field>
-                            <FieldLabel for="confirm-password">
-                                Confirm Password
+                            <FieldLabel for="newPassword">
+                                New Password
                                 <span class="text-red-600">*</span>
                             </FieldLabel>
                             <Input
-                                id="confirmPassword"
+                                id="newPassword"
                                 type="password"
-                                name="confirmPassword"
+                                name="newPassword"
                                 required
                             />
                         </Field>
                         <Field>
+                            <FieldLabel for="confirmNewPassword">
+                                Confirm New Password
+                                <span class="text-red-600">*</span>
+                            </FieldLabel>
                             <Input
-                                :modelValue="tokenValue"
-                                id="token"
-                                type="text"
-                                name="token"
-                                readonly
+                                id="confirmNewPassword"
+                                type="password"
+                                name="confirmNewPassword"
                                 required
-                                hidden
                             />
                         </Field>
                         <Field>

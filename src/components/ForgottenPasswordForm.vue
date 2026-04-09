@@ -20,6 +20,27 @@ import { Input } from '@/components/ui/input'
 const props = defineProps<{
     class?: HTMLAttributes['class']
 }>()
+
+async function submit(e: Event) {
+    e.preventDefault()
+
+    const email = (e.currentTarget as HTMLFormElement).email.value
+
+    const response = await fetch('/api/auth/request-password-reset', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: email,
+            redirectTo: 'http://localhost:4321/resetpassword',
+        }),
+        credentials: 'include',
+    })
+
+    window.location.href =
+        'http://localhost:4321/waitForPasswordResetEmail?emailAddress=' + email
+}
 </script>
 
 <template>
@@ -33,13 +54,14 @@ const props = defineProps<{
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <form>
+                <form @submit="submit">
                     <FieldGroup>
                         <Field>
                             <FieldLabel for="email"> Email </FieldLabel>
                             <Input
                                 id="email"
                                 type="email"
+                                name="emailAddress"
                                 placeholder="m@example.com"
                                 required
                             />

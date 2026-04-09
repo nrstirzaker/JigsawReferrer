@@ -1,0 +1,10 @@
+---
+import { signOutAndRedirect } from '@/lib/authHelpers.ts'
+
+export const prerender = false // server-only
+
+// Sign out and redirect
+const redirectUrl = await signOutAndRedirect(Astro.request)
+
+Astro.redirect(redirectUrl)
+---

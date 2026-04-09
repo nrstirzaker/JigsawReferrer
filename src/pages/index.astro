@@ -1,5 +1,10 @@
 ---
 import '../styles/global.css'
+
+import { auth } from '@/lib/auth'
+const session = await auth.api.getSession({
+    headers: Astro.request.headers,
+})
 ---
 
 <html lang="en">
@@ -49,8 +54,13 @@ import '../styles/global.css'
             <a href="signup">Sign Up</a>
             <a href="signin">Sign In</a>
             <a href="forgottenpassword">Forgotten Password</a>
-            <a href="resetpassword">Reset Password</a>
-            <a href="verifyemail">Verify Email</a>
+            <a href="resetpassword">Reset Password (with Token)</a>
+            <a href="changepassword">Change Password</a>
+            <a href="verifyemail">Verify Email Template</a>
+            <a href="forgottenpasswordemail">Forgotten Password Template</a>
+            <a href="securepage">Secure Page</a>
+            <a href="openpage">Open Page</a>
+            <a href="signout">Sign Out</a>
         </div>
     </body>
 </html>

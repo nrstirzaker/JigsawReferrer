@@ -12,9 +12,13 @@ export default defineConfig({
     output: 'server',
     vite: {
         plugins: [tailwindcss()],
+        server: {
+            // For dev, ensure cookies work on localhost
+            cors: true,
+        },
     },
     integrations: [vue()],
-
+    middleware: ['./src/middleware.ts'],
     adapter: node({
         mode: 'standalone',
     }),

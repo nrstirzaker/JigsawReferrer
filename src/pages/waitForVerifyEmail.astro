@@ -1,0 +1,27 @@
+---
+const emailAddress = Astro.url.searchParams.get('emailAddress') || ''
+import '../styles/global.css'
+---
+
+<!doctype html>
+<html>
+    <body>
+        <div>
+            <div class="flex h-screen items-center justify-center">
+                <div class="border-2">
+                    <div class="mb-3 text-3xl">
+                        A verification link has been sent to your email account: {
+                            emailAddress
+                        }
+                    </div>
+
+                    <br />
+                    <div class="text-2xl">
+                        Please click on the button in the email to finish
+                        activating your account
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

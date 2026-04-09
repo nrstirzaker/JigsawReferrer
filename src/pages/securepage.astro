@@ -1,0 +1,16 @@
+---
+export const prerender = false
+const user = Astro.locals.user
+
+if (!user) {
+    return Astro.redirect('/signin')
+}
+---
+
+<!doctype html>
+<html>
+    <body>
+        <h1>Secure page</h1>
+        <p>Welcome {user?.email}</p>
+    </body>
+</html>

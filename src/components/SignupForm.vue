@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import {
     Card,
@@ -17,21 +16,39 @@ import {
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 
-const responseMessage = ref<string>()
-//const router = useRouter()
 async function submit(e: Event) {
     e.preventDefault()
 
-    const formData = new FormData(e.currentTarget as HTMLFormElement)
-    const response = await fetch('/api/signup', {
+    //const formData = new FormData(e.currentTarget as HTMLFormElement)
+    const firstName = (e.currentTarget as HTMLFormElement).firstName.value
+    const surname = (e.currentTarget as HTMLFormElement).surname.value
+    const name = firstName + ' ' + surname
+    const email = (e.currentTarget as HTMLFormElement).email.value
+    const password = (e.currentTarget as HTMLFormElement).password.value
+
+    console.log('name: ' + name)
+    console.log('emailaddress: ' + email)
+    console.log('password: ' + password)
+
+    const response = await fetch('/api/auth/sign-up/email', {
+        headers: {
+            'Content-Type': 'application/json',
+        },
         method: 'POST',
-        body: formData,
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            callbackURL: 'http://localhost:4321/signin',
+        }),
+        credentials: 'include',
     })
-    const data = await response.json()
-    responseMessage.value = data.message
-    //router.push({
-    //    path: 'privacypolicy/${emailaddress}',
-    //})
+
+    if (response.ok) {
+        window.location.href = 'waitForVerifyEmail/?emailAddress=' + email
+    } else {
+        console.error('sign up failed')
+    }
 }
 </script>
 
