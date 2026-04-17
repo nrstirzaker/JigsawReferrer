@@ -13,21 +13,44 @@ import {
     FieldDescription,
     FieldGroup,
     FieldLabel,
+    FieldError,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { Field as VeeField, useForm } from 'vee-validate'
 
-async function submit(e: Event) {
-    e.preventDefault()
+import * as yup from 'yup'
 
-    //const formData = new FormData(e.currentTarget as HTMLFormElement)
-    const firstName = (e.currentTarget as HTMLFormElement).firstName.value
-    const surname = (e.currentTarget as HTMLFormElement).surname.value
+const schema = yup.object({
+    firstName: yup.string().required(),
+    surname: yup.string().required(),
+    email: yup.string().required().email(),
+    password: yup.string().required().min(8),
+    confirmPassword: yup
+        .string()
+        .oneOf([yup.ref('password')], "Passwords don't match!")
+        .required('Required'),
+})
+
+const { handleSubmit } = useForm({
+    validationSchema: schema,
+    initialValues: {
+        firstName: '',
+        surname: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    },
+})
+
+const onSubmit = handleSubmit(async (values: any) => {
+    const firstName = values.firstName
+    const surname = values.surname
     const name = firstName + ' ' + surname
-    const email = (e.currentTarget as HTMLFormElement).email.value
-    const password = (e.currentTarget as HTMLFormElement).password.value
+    const email = values.email
+    const password = values.password
 
     console.log('name: ' + name)
-    console.log('emailaddress: ' + email)
+    console.log('email: ' + email)
     console.log('password: ' + password)
 
     const response = await fetch('/api/auth/sign-up/email', {
@@ -49,7 +72,7 @@ async function submit(e: Event) {
     } else {
         console.error('sign up failed')
     }
-}
+})
 </script>
 
 <template>
@@ -61,76 +84,104 @@ async function submit(e: Event) {
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <form @submit="submit">
+            <form id="sign-up-form" @submit="onSubmit">
                 <FieldGroup>
-                    <Field>
-                        <FieldLabel for="firstName">
-                            First Name <span class="text-red-600">*</span>
-                        </FieldLabel>
-                        <Input
-                            id="firstName"
-                            type="text"
-                            placeholder="Jane"
-                            name="firstName"
-                            required
-                        />
-                    </Field>
-                    <Field>
-                        <FieldLabel for="surname">
-                            Surname
-                            <span class="text-red-600">*</span></FieldLabel
-                        >
-                        <Input
-                            id="surname"
-                            type="text"
-                            placeholder="Doe"
-                            name="surname"
-                            required
-                        />
-                    </Field>
-                    <Field>
-                        <FieldLabel for="email">
-                            Email
-                            <span class="text-red-600">*</span></FieldLabel
-                        >
-                        <Input
-                            id="email"
-                            type="email"
-                            placeholder="m@example.com"
-                            name="email"
-                            required
-                        />
-                    </Field>
-                    <Field>
-                        <FieldLabel for="password">
-                            Password
-                            <span class="text-red-600">*</span></FieldLabel
-                        >
-                        <Input
-                            id="password"
-                            type="password"
-                            name="password"
-                            required
-                        />
-                        <FieldDescription
-                            >Must be at least 8 characters
-                            long.</FieldDescription
-                        >
-                    </Field>
-                    <Field>
-                        <FieldLabel for="confirm-password">
-                            Confirm Password <span class="text-red-600">*</span>
-                        </FieldLabel>
-                        <Input
-                            id="confirmPassword"
-                            type="password"
-                            name="confirmPassword"
-                            required
-                        />
-                        <FieldDescription
-                            >Please confirm your password.</FieldDescription
-                        >
-                    </Field>
+                    <VeeField v-slot="{ field, errors }" name="firstName">
+                        <Field :data-invalid="!!errors.length">
+                            <FieldLabel for="firstName">
+                                First Name <span class="text-red-600">*</span>
+                            </FieldLabel>
+                            <Input
+                                id="firstName"
+                                type="text"
+                                placeholder="Jane"
+                                v-bind="field"
+                                :aria-invalid="!!errors.length"
+                                autocomplete="off"
+                                data-vv-validate-on="none"
+                            />
+                            <FieldError v-if="errors.length" :errors="errors" />
+                        </Field>
+                    </VeeField>
+                    <VeeField v-slot="{ field, errors }" name="surname">
+                        <Field :data-invalid="!!errors.length">
+                            <FieldLabel for="surname">
+                                Surname
+                                <span class="text-red-600">*</span>
+                            </FieldLabel>
+                            <Input
+                                id="surname"
+                                type="text"
+                                placeholder="Doe"
+                                v-bind="field"
+                                :aria-invalid="!!errors.length"
+                                autocomplete="off"
+                                data-vv-validate-on="none"
+                            />
+                        </Field>
+                    </VeeField>
+                    <VeeField v-slot="{ field, errors }" name="email">
+                        <Field :data-invalid="!!errors.length">
+                            <FieldLabel for="email">
+                                Email
+                                <span class="text-red-600">*</span>
+                            </FieldLabel>
+
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="m@example.com"
+                                v-bind="field"
+                                :aria-invalid="!!errors.length"
+                                autocomplete="off"
+                                data-vv-validate-on="none"
+                            />
+                        </Field>
+                    </VeeField>
+                    <VeeField v-slot="{ field, errors }" name="password">
+                        <Field>
+                            <FieldLabel for="password">
+                                Password
+                                <span class="text-red-600">*</span>
+                            </FieldLabel>
+                            <Input
+                                id="password"
+                                type="password"
+                                v-bind="field"
+                                :aria-invalid="!!errors.length"
+                                autocomplete="off"
+                                data-vv-validate-on="none"
+                            />
+                            <FieldDescription
+                                >Must be at least 8 characters long.
+                            </FieldDescription>
+                            <FieldError v-if="errors.length" :errors="errors" />
+                        </Field>
+                    </VeeField>
+                    <VeeField v-slot="{ field, errors }" name="confirmPassword">
+                        <Field>
+                            <FieldLabel for="confirm-password">
+                                Confirm Password
+                                <span class="text-red-600">*</span>
+                            </FieldLabel>
+                            <Input
+                                id="confirmPassword"
+                                type="password"
+                                v-bind="field"
+                                :aria-invalid="!!errors.length"
+                                autocomplete="off"
+                                data-vv-validate-on="none"
+                            />
+                            <div v-if="errors.length">
+                                <FieldError true :errors="errors" />
+                            </div>
+                            <div v-else>
+                                <FieldDescription>
+                                    Please confirm your password.
+                                </FieldDescription>
+                            </div>
+                        </Field>
+                    </VeeField>
                     <FieldGroup>
                         <Field>
                             <Button type="submit"> Create Account </Button>

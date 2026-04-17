@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -11,6 +11,10 @@ import {
 } from '@/components/ui/card'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+
+const props = defineProps<{
+    class?: HTMLAttributes['class']
+}>()
 
 async function submit(e: Event) {
     e.preventDefault()
@@ -32,9 +36,13 @@ async function submit(e: Event) {
         credentials: 'include',
     })
 
-    console.log('response: ' + response is 400 if current password is not correct
+    console.log('response.status: ' + response.status)
 
-    window.location.href = 'http://localhost:4321/signin'
+    if (response.status == 400) {
+        window.location.href = 'http://localhost:4321/changepassword'
+    } else {
+        window.location.href = 'http://localhost:4321/signin'
+    }
 }
 </script>
 
