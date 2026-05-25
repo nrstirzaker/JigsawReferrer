@@ -11,7 +11,11 @@ import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 </script>
-
+<style>
+textarea {
+    resize: none;
+}
+</style>
 <template>
     <Card>
         <CardHeader>
@@ -21,6 +25,15 @@ import { Input } from '@/components/ui/input'
         <CardContent>
             <form action="/api/refer" method="POST">
                 <FieldGroup>
+                    <Field>
+                        <FieldLabel for="referralId"> Referral Id </FieldLabel>
+                        <Input
+                            id="referralId"
+                            type="text"
+                            name="referralId"
+                            readonly
+                        />
+                    </Field>
                     <Field>
                         <FieldLabel for="name"> Full Name </FieldLabel>
                         <Input
