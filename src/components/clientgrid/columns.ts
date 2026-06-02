@@ -28,7 +28,7 @@ export const columns: ColumnDef<Client>[] = [
                 Button,
                 {
                     variant: 'ghost',
-                    class: 'content-center',
+                    class: 'text-right',
                     onClick: () =>
                         column.toggleSorting(column.getIsSorted() === 'asc'),
                 },

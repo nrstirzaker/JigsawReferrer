@@ -65,7 +65,7 @@ const table = useVueTable({
 <template>
     <div class="flex items-center py-4">
         <Input
-            class="max-w-sm"
+            class="mr-3 max-w-sm"
             placeholder="Filter names..."
             :model-value="
                 table.getColumn('fullName')?.getFilterValue() as string
@@ -74,7 +74,11 @@ const table = useVueTable({
                 table.getColumn('fullName')?.setFilterValue($event)
             "
         />
+        <Button as-child>
+            <a href="/client/parent-carer">Add</a>
+        </Button>
     </div>
+
     <div class="rounded-md border">
         <Table>
             <TableHeader>
