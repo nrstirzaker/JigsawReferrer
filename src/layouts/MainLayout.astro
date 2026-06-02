@@ -1,0 +1,48 @@
+---
+import '@/styles/global.css'
+const { title } = Astro.props
+import { ref } from 'vue'
+
+const isClientSearchOpen = ref(false)
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, height=
+            device-height"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>{title}</title>
+    </head>
+    <body>
+        <div class="dialogContainer">
+            <div class="grid h-screen grid-cols-12 grid-rows-25">
+                <header class="col-span-12 row-start-1 row-end-1">
+                    User: nrstirzaker@gmail.com Logged in: 26/04/2026 19:19
+                </header>
+                <nav class="col-span-1 row-start-2 row-end-25">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li>
+                            <a href="/client/client-grid">Clients</a>
+                        </li>
+                        <li><a href="/user/profile">Profile</a></li>
+                    </ul>
+                </nav>
+                <main class="col-span-11 row-start-2 row-end-15">
+                    <slot />
+                </main>
+                <!-- <footer class="col-span-12 row-start-25 row-end-25 bg-gray-300">
+                Privacy Policy, Terms of Use
+            </footer> -->
+            </div>
+        </div>
+    </body>
+</html>
+
+<script></script>
+
+<style></style>
