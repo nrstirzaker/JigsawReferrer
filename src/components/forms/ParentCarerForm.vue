@@ -26,6 +26,8 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
+import { Label } from '@/components/ui/label'
+import "tailwindcss";
 
 const genderOptions = ['Male', 'Female', 'Prefer not to say']
 const pregnantOptions = ['Yes', 'No']
@@ -35,6 +37,9 @@ const refugeOptions = ['Refuge 1', 'Refuge 2']
 function AddChild() {}
 </script>
 <style>
+.manditory {
+    color: red;
+}
 .border-input {
     border-color: black;
     border-radius: 4px;
@@ -58,24 +63,25 @@ button {
                         <div class="grid grid-cols-4 gap-1">
                             <Field class="min-w-1/4">
                                 <FieldLabel for="firstname">
-                                    Firstname
+                                    First Name <span class="manditory">*</span>
                                 </FieldLabel>
                                 <Input
                                     id="firstname"
                                     type="text"
-                                    placeholder="Firstname"
+                                    placeholder="First Name"
                                     name="firstname"
                                     class="rounded-lg border"
+                                    required
                                 />
                             </Field>
                             <Field class="min-w-1/4">
                                 <FieldLabel for="lastname">
-                                    Lastname
+                                    Last Name <span class="manditory">*</span>
                                 </FieldLabel>
                                 <Input
                                     id="lastname"
                                     type="text"
-                                    placeholder="Lastname"
+                                    placeholder="Last Name"
                                     name="lastname"
                                 />
                             </Field>
@@ -84,7 +90,7 @@ button {
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="m@example.com"
+                                    placeholder="email@example.com"
                                     name="email"
                                     required
                                 />
@@ -94,7 +100,7 @@ button {
                                 <Input
                                     id="tel"
                                     type="tel"
-                                    placeholder="mobile or landline"
+                                    placeholder="Mobile or Landline"
                                     name="tel"
                                 />
                             </Field>
@@ -175,13 +181,13 @@ button {
                                     id="gender"
                                     type="select"
                                     name="gender"
-                                    place-holder="Male"
+                                    place-holder="Please Select"
                                     :options="genderOptions"
                                 />
                             </Field>
                             <Field class="w-1">
                                 <FieldLabel for="pregnant">
-                                    Pregnant
+                                    Pregnant?
                                 </FieldLabel>
                                 <Select
                                     id="pregnant"

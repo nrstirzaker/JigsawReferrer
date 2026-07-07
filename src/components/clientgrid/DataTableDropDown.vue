@@ -32,7 +32,7 @@ function copy(id: number) {
         <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem @click="copy(client.id)">
-                Copy client ID
+                Copy Client Id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem

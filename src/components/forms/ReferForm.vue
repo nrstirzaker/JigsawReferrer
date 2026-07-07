@@ -24,61 +24,46 @@ textarea {
         </CardHeader>
         <CardContent>
             <form action="/api/refer" method="POST">
-                <FieldGroup>
-                    <Field>
-                        <FieldLabel for="referralId"> Referral Id </FieldLabel>
-                        <Input
-                            id="referralId"
-                            type="text"
-                            name="referralId"
-                            readonly
-                        />
-                    </Field>
-                    <Field>
-                        <FieldLabel for="name"> Full Name </FieldLabel>
-                        <Input
-                            id="name"
-                            type="text"
-                            placeholder="John Doe"
-                            name="name"
-                            required
-                        />
-                    </Field>
-                    <Field>
-                        <FieldLabel for="reasonForReferral">
-                            Reason For Referral
-                        </FieldLabel>
-                        <Textarea
-                            id="reasonForReferral"
-                            placeholder="Reason for referral"
-                            required
-                        />
-                    </Field>
-                    <Field>
-                        <FieldLabel for="descriptionOfItemsNeeded">
-                            Description Of Items Needed
-                        </FieldLabel>
-                        <Textarea
-                            id="descriptionOfItemsNeeded"
-                            placeholder="Description Of Items Needed"
-                            required
-                        />
-                    </Field>
-                    <Field>
-                        <FieldLabel for="additionalNotes">
-                            Additional Notes
-                        </FieldLabel>
-                        <Textarea
-                            id="additionalNotes"
-                            placeholder="Additional Notes"
-                            required
-                        />
-                    </Field>
-                    <div class="flex justify-center gap-5">
-                        <Button type="submit"> Save </Button>
-                        <Button type="button"> Cancel </Button>
-                    </div>
-                </FieldGroup>
+                <div class="w-6xl">
+                    <FieldGroup class="mb-4">
+                        <div class="grid grid-cols-4 gap-1">
+                            <Field>
+                                <FieldLabel for="referralId"> Referral Id </FieldLabel>
+                                <Input id="referralId" type="text" name="referralId"
+                                    placeholder="20260708-100350-JH or 000000024" readonly />
+                            </Field>
+                            <Field>
+                                <FieldLabel for="name"> Full Name <span class="manditory">*</span></FieldLabel>
+                                <Input id="name" type="text" placeholder="John Doe" name="name" required />
+                            </Field>
+                        </div>
+                    </FieldGroup>
+                    <FieldGroup class="mb-4">
+                        <Field>
+                            <FieldLabel for="reasonForReferral">
+                                Reason For Referral <span class="manditory">*</span>
+                            </FieldLabel>
+                            <Textarea id="reasonForReferral" placeholder="Reason for referral" required />
+                        </Field>
+                        <Field>
+                            <FieldLabel for="descriptionOfItemsNeeded">
+                                Description Of Items Needed <span class="manditory">*</span>
+                            </FieldLabel>
+                            <Textarea id="descriptionOfItemsNeeded" placeholder="Description Of Items Needed"
+                                required />
+                        </Field>
+                        <Field>
+                            <FieldLabel for="additionalNotes">
+                                Additional Notes <span class="manditory">*</span>
+                            </FieldLabel>
+                            <Textarea id="additionalNotes" placeholder="Additional Notes" required />
+                        </Field>
+                        <div class="flex justify-center gap-5">
+                            <Button type="submit"> Save </Button>
+                            <Button type="button"> Cancel </Button>
+                        </div>
+                    </FieldGroup>
+                </div>
             </form>
         </CardContent>
     </Card>
