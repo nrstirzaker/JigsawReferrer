@@ -3,10 +3,21 @@ import type { Client } from '@/typings/client'
 import { onMounted, ref } from 'vue'
 import { columns } from './columns'
 import DataTable from './DataTable.vue'
+import { db } from '@/db/db.ts'
+import { parentCarers } from '@/schema/registration-schema.ts'
 
 const data = ref<Client[]>([])
 
 async function getData(): Promise<Client[]> {
+    // return await db
+    //     .select({
+    //         field1: users.id,
+    //         field2: users.name,
+    //     })
+    //     .from(parentCarers)
+}
+
+async function getData1(): Promise<Client[]> {
     // Fetch data from your API here.
     return [
         {

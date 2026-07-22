@@ -1,9 +1,11 @@
 import type { Client } from '@/typings/client'
 import type { ColumnDef } from '@tanstack/vue-table'
-import DropdownAction from '@/components/clientgrid/DataTableDropDown.vue'
+//import DropdownAction from '@/components/clientgrid/DataTableDropDown.vue'
 import { h } from 'vue'
 import { ArrowUpDown, ChevronDown } from '@lucide/vue'
-import { Button } from '@/components/ui/button'
+import  {Button} from '@/components/ui/button'
+import  EditClientButton  from '@/components/clientgrid/EditClientButton.vue'
+import  ReferClientButton  from '@/components/clientgrid/ReferClientButton.vue'
 
 // const [DefineTemplate, ReuseTemplate] = createReusableTemplate<{
 //   payment: {
@@ -52,18 +54,26 @@ export const columns: ColumnDef<Client>[] = [
         },
     },
     {
-        id: 'actions',
+        id: 'actionsEditClient',
+        enableHiding: false,
+        cell: ({ row }) => {
+            const client: Client = row.original
+            const id: number = row.getValue('id')
+            console.log("id: " +id)
+            return h(
+                EditClientButton,{clientId:id}
+            )
+        },
+    },
+    {
+        id: 'actionsReferClient',
         enableHiding: false,
         cell: ({ row }) => {
             const client: Client = row.original
 
             return h(
-                'div',
-                { class: 'relative' },
-                h(DropdownAction, {
-                    client,
-                })
+                ReferClientButton, {clientId:row.getValue('id')}
             )
         },
-    },
+    },    
 ]
