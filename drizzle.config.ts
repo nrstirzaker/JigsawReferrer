@@ -1,13 +1,13 @@
 import { defineConfig } from 'drizzle-kit'
-import '@dotenvx/dotenvx/config'
+
 
 //const credentialsConfig = getCredentials();
-const url: { url: string } = getURL()
+//const url: { url: string } = getURL()
 
 export default defineConfig({
     dialect: 'postgresql',
     schema: './src/schema/auth-schema.ts',
-    dbCredentials: url,
+    dbCredentials: import.meta.env.DATABASE_URL,
     migrations: {
         table: 'journal',
     },
