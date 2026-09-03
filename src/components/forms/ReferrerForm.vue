@@ -33,13 +33,13 @@ const organisationOptions = ['Organisation One', 'Organisation Two']
                     <FieldGroup class="mb-4">
                         <div class="grid grid-cols-4 gap-1">
                             <Field>
-                                <FieldLabel for="title"> Title <span class="manditory">*</span></FieldLabel>
+                                <FieldLabel for="title"> Title <span class="mandatory">*</span></FieldLabel>
                                 <Select id="title" type="select" name="title" place-holder="Please Select"
                                     :options="titleOptions" />
                             </Field>
 
                             <Field>
-                                <FieldLabel for="firstName"> Firstname <span class="manditory">*</span></FieldLabel>
+                                <FieldLabel for="firstName"> Firstname <span class="mandatory">*</span></FieldLabel>
                                 <Input id="firstName" type="text" placeholder="First Name" name="firstName" />
                             </Field>
                             <Field>
@@ -47,12 +47,12 @@ const organisationOptions = ['Organisation One', 'Organisation Two']
                                 <Input id="middleInitials" type="text" placeholder="Middle Initials" name="middleInitials" />
                             </Field>
                             <Field>
-                                <FieldLabel for="lastName"> Lastname <span class="manditory">*</span></FieldLabel>
+                                <FieldLabel for="lastName"> Lastname <span class="mandatory">*</span></FieldLabel>
                                 <Input id="lastName" type="text" placeholder="Last Name" name="lastName" />
                             </Field>
 
                             <Field>
-                                <FieldLabel for="email"> Email <span class="manditory">*</span></FieldLabel>
+                                <FieldLabel for="email"> Email <span class="mandatory">*</span></FieldLabel>
                                 <Input id="email" type="email" placeholder="email@example.com" name="email" required />
                                 <FieldDescription>
                                     We'll use this to contact you. We will not share
@@ -61,7 +61,7 @@ const organisationOptions = ['Organisation One', 'Organisation Two']
                             </Field>
 
                             <Field>
-                                <FieldLabel for="tel"> Phone <span class="manditory">*</span></FieldLabel>
+                                <FieldLabel for="tel"> Phone <span class="mandatory">*</span></FieldLabel>
                                 <Input id="tel" type="tel" placeholder="07825324478" name="tel" />
                                 <FieldDescription>
                                     We'll use this to contact you. We will not share

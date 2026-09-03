@@ -39,17 +39,15 @@ const seedDb = async () => {
             },
         },
 
-        parentCarers: {
+        client: {
             count: 40,
             columns: {
-                referralNumber: g.int({ minValue: 1000, maxValue: 9999 }),
                 firstName: g.firstName(),
                 lastName: g.lastName(),
                 address: g.streetAddress(),
                 email: g.email(),
                 phoneNumber: g.phoneNumber({ template: '+44 7#### #####' }),
                 isPregnant: g.boolean(),
-                reasonForReferral: g.loremIpsum(),
                 gender: g.valuesFromArray({
                     values: ['male', 'female', 'prefer_not_to_say'],
                 }),

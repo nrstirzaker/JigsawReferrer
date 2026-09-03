@@ -1,21 +1,24 @@
-<script setup lang="ts">
-import type { Client } from '@/typings/client'
-import { onMounted, ref } from 'vue'
-import { columns } from './columns'
+<script lang="ts" setup>
+import type {Client} from '@/typings/client'
+import {onMounted, ref} from 'vue'
+import {columns} from './columns'
 import DataTable from './DataTable.vue'
-import { db } from '@/db/db.ts'
-import { parentCarers } from '@/schema/registration-schema.ts'
+
+//import winston from 'winston';
+
+// const logger = winston.createLogger({
+//   transports: [
+//     new winston.transports.Console(),
+//   ]
+// });
 
 const data = ref<Client[]>([])
+const referrerId = 'd11fa986-6a83-43af-00d9-435bed8ba9a8'
 
-async function getData()  {
-    return db
-        .select({
-            id: parentCarers.parentCarerId,
-            fullName: parentCarers.firstName,
-            phoneNumber: parentCarers.phoneNumber
-        })
-        .from(parentCarers)
+async function fetchData(referrerId : string) : Promise<Client[]>{
+  console.log("referrerId: get all records for: ", referrerId )
+  const response =  await fetch('/api/client/'+ referrerId)// + referrerId)
+  return await response.json()
 }
 
 // async function getData(): Promise<Client[]> {
@@ -265,12 +268,12 @@ async function getData()  {
 //}
 
 onMounted(async () => {
-    data.value = await getData()
+  data.value = await fetchData(referrerId)
 })
 </script>
 
 <template>
-    <div class="container mx-auto py-10">
-        <DataTable :columns="columns" :data="data" />
-    </div>
+  <div class="container mx-auto py-10">
+    <DataTable :columns="columns" :data="data"/>
+  </div>
 </template>

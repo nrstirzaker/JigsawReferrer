@@ -36,7 +36,7 @@ const refugeOptions = ['Refuge 1', 'Refuge 2']
 function AddChild() {}
 </script>
 <style>
-.manditory {
+.mandatory {
     color: red;
 }
 .border-input {
@@ -62,7 +62,7 @@ button {
                         <div class="grid grid-cols-4 gap-1">
                             <Field class="min-w-1/4">
                                 <FieldLabel for="firstname">
-                                    First Name <span class="manditory">*</span>
+                                    First Name <span class="mandatory">*</span>
                                 </FieldLabel>
                                 <Input
                                     id="firstname"
@@ -75,7 +75,7 @@ button {
                             </Field>
                             <Field class="min-w-1/4">
                                 <FieldLabel for="lastname">
-                                    Last Name <span class="manditory">*</span>
+                                    Last Name <span class="mandatory">*</span>
                                 </FieldLabel>
                                 <Input
                                     id="lastname"

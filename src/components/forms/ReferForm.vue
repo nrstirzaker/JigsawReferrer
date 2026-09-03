@@ -33,7 +33,7 @@ textarea {
                                     placeholder="20260708-100350-JH or 000000024" readonly />
                             </Field>
                             <Field>
-                                <FieldLabel for="name"> Full Name <span class="manditory">*</span></FieldLabel>
+                                <FieldLabel for="name"> Full Name <span class="mandatory">*</span></FieldLabel>
                                 <Input id="name" type="text" placeholder="John Doe" name="name" required />
                             </Field>
                         </div>
@@ -41,20 +41,20 @@ textarea {
                     <FieldGroup class="mb-4">
                         <Field>
                             <FieldLabel for="reasonForReferral">
-                                Reason For Referral <span class="manditory">*</span>
+                                Reason For Referral <span class="mandatory">*</span>
                             </FieldLabel>
                             <Textarea id="reasonForReferral" placeholder="Reason for referral" required />
                         </Field>
                         <Field>
                             <FieldLabel for="descriptionOfItemsNeeded">
-                                Description Of Items Needed <span class="manditory">*</span>
+                                Description Of Items Needed <span class="mandatory">*</span>
                             </FieldLabel>
                             <Textarea id="descriptionOfItemsNeeded" placeholder="Description Of Items Needed"
                                 required />
                         </Field>
                         <Field>
                             <FieldLabel for="additionalNotes">
-                                Additional Notes <span class="manditory">*</span>
+                                Additional Notes <span class="mandatory">*</span>
                             </FieldLabel>
                             <Textarea id="additionalNotes" placeholder="Additional Notes" required />
                         </Field>

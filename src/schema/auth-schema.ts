@@ -92,27 +92,4 @@ export const accountRelations = relations(account, ({ one }) => ({
   }),
 }));
 
-export const membership = pgEnum("Membership", ['Follower', 'Participant', 'Activist'])
 
-
-export const addressBook = pgTable("AddressBook", {
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: uuid().defaultRandom().primaryKey().notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { mode: 'string' }),
-    firstName: varchar("first_name"),
-    familyName: varchar("family_name"),
-    houseNumberOrName: varchar("house_number_or_name"),
-    postCode: varchar("post_code"),
-    emailAddress: varchar("email_address"),
-    privacyStatement: boolean("privacy_statement").default(false),
-    street: varchar(),
-    village: varchar(),
-    town: varchar(),
-    waysToHelp: varchar("ways_to_help"),
-    membership: membership(),
-    title: text(),
-}, (table) => [
-    unique("AddressBook_id_key").on(table.id),
-    unique("AddressBook_email_address_key").on(table.emailAddress),
-]);
